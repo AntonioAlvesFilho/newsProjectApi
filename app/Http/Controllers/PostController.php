@@ -14,7 +14,7 @@ class PostController extends Controller
 
 	public function public() {
 		// invés do take(4), que puxa os primeiros 4 itens apenas. Pode ser usado o slice(4) que puxa a aprtir do 4° item
-    $posts = Post::all()->take(5);
+    $posts = Post::all()->take(4);
     return PostResource::collection($posts);
 }
 
