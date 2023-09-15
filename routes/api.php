@@ -40,10 +40,12 @@ Route::group([
 
 	Route::prefix('posts')->group(function () {
 		Route::get('public', [PostController::class, 'public']);
+		Route::get('public-light', [PostController::class, 'publicLight']);
 		Route::get('', [PostController::class, 'index']);
-		Route::put('{post}', [PostController::class, 'update']);
+		Route::get('{url}', [PostController::class, 'post']);
+		// Route::put('{post}', [PostController::class, 'update']);
 		Route::post('', [PostController::class, 'store']);
-		Route::delete('{post}', [PostController::class, 'destroy']);
+		// Route::delete('{post}', [PostController::class, 'destroy']);
 	});
 
 	Route::prefix('todos')->group(function () {
