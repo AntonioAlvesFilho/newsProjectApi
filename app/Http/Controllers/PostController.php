@@ -29,10 +29,9 @@ class PostController extends Controller
 		return PostResource::collection(auth()->user()->posts);
 	}
 
-	public function post($url)
+	public function post($id)
 	{
-
-			$post = Post::where('url', $url)->first();
+			$post = Post::where('id', $id)->first();
 
 			if (!$post) {
 					return response()->json( 'Post not found', 404);

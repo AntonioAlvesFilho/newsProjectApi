@@ -42,7 +42,7 @@ Route::group([
 		Route::get('public', [PostController::class, 'public']);
 		Route::get('public-light', [PostController::class, 'publicLight']);
 		Route::get('', [PostController::class, 'index']);
-		Route::get('{url}', [PostController::class, 'post']);
+		Route::get('{id}', [PostController::class, 'post']);
 		// Route::put('{post}', [PostController::class, 'update']);
 		Route::post('', [PostController::class, 'store']);
 		// Route::delete('{post}', [PostController::class, 'destroy']);
