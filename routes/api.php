@@ -7,6 +7,7 @@ use App\Http\Controllers\MeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\TodoController;
 use App\Http\Controllers\TodoTaskController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,11 @@ Route::group([
 		// Route::put('{post}', [PostController::class, 'update']);
 		Route::post('', [PostController::class, 'store']);
 		// Route::delete('{post}', [PostController::class, 'destroy']);
+	});
+
+	Route::prefix('categories')->group(function () {
+		Route::get('', [CategoryController::class, 'index']);
+		Route::post('', [CategoryController::class, 'store']);
 	});
 
 	Route::prefix('todos')->group(function () {
