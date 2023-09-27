@@ -7,6 +7,7 @@ use App\Http\Requests\PostRegisterRequest;
 use App\Http\Resources\PostResource;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Support\Str;
 
 
@@ -29,7 +30,7 @@ class PostController extends Controller
 		return PostResource::collection(auth()->user()->posts);
 	}
 
-	public function post($id)
+	public function postView($id)
 	{
 			$post = Post::where('id', $id)->first();
 
@@ -40,11 +41,32 @@ class PostController extends Controller
 			return response()->json( $post);
 	}
 
+	public function postByCategory($category)
+{
+    
+    $categoryName = Category::where('name', $category)->first();
+
+    if (!$categoryName) {
+        return response()->json(['message' => 'Categoria não encontrada'], 404);
+    }
+
+    // Recupere todos os posts associados à categoria
+    $posts = $categoryName->posts;
+
+    return response()->json(['posts' => $posts]);
+}
+
+	//Store posts bellow
 	public function store(PostRegisterRequest $request) {
-		
+
 		$input = $request->validated();
 
-		$post = auth()->user()->posts()->create($input);		
+		$post = auth()->user()->posts()->create([
+			'title' => $input['title'], 
+			'description' => $input['description'],
+			'image' => $input['image'],
+		]);		
+
 
 		$postId = $post->id;
 
@@ -66,8 +88,12 @@ class PostController extends Controller
 			// Update the input to include the S3 URL
 			$post->image = $s3Url;
 		}
+		
 
-		$post->save();
+		$post->save();	
+
+		$category = Category::firstOrCreate(['name' => $input['category']]);
+    $post->categories()->attach($category->id);
 
 		return new PostResource($post);
 	}

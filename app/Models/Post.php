@@ -15,4 +15,15 @@ class Post extends Model
 			'image',
 			'url'
 		];
+
+		public function posts()
+{
+    return $this->belongsToMany(Post::class);
+}
+
+public function categories()
+{
+    return $this->belongsToMany(Category::class);
+}
+
 }

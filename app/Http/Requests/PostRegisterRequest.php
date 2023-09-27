@@ -25,7 +25,8 @@ class PostRegisterRequest extends FormRequest
 					'title' => 'required|string',
 					'description' => 'required|string',
 					'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:4096',
-					'url' => 'string'
+					'url' => 'string',
+					'category' => 'string|required'
         ];
     }
 }
