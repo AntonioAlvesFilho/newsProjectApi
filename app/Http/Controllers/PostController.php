@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 class PostController extends Controller
 {
 
-	public function public() {
+	public function index() {
 		// invés do take(4), que puxa os primeiros 4 itens apenas. Pode ser usado o slice(4) que puxa a aprtir do 4° item
     $posts = Post::all()->take(4);
     return PostResource::collection($posts);
@@ -26,13 +26,13 @@ class PostController extends Controller
 	return PostResource::collection($posts);
 	}
 
-	public function index() {
+	public function myPosts() {
 		return PostResource::collection(auth()->user()->posts);
 	}
 
 	public function postView($id)
 	{
-			$post = Post::where('id', $id)->first();
+		$post = Post::with('categories')->find($id);
 
 			if (!$post) {
 					return response()->json( 'Post not found', 404);

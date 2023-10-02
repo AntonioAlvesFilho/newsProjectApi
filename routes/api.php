@@ -40,9 +40,9 @@ Route::group([
 	});
 
 	Route::prefix('posts')->group(function () {
-		Route::get('public', [PostController::class, 'public']);
-		Route::get('public-light', [PostController::class, 'publicLight']);
 		Route::get('', [PostController::class, 'index']);
+		Route::get('public-light', [PostController::class, 'publicLight']);
+		Route::get('my-posts', [PostController::class, 'myPosts']);
 		Route::get('{id}', [PostController::class, 'postView']);
 		// Route::put('{post}', [PostController::class, 'update']);
 		Route::post('', [PostController::class, 'store']);
