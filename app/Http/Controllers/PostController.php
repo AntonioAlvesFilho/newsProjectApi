@@ -16,13 +16,15 @@ class PostController extends Controller
 
 	public function index() {
 		// invés do take(4), que puxa os primeiros 4 itens apenas. Pode ser usado o slice(4) que puxa a aprtir do 4° item
-    $posts = Post::all()->take(4);
+    $posts = Post::all()->take(2);
     return PostResource::collection($posts);
+	
 	}
 
-	public function publicLight() {
+	public function postsByQty($qty) {
 	// invés do take(4), que puxa os primeiros 4 itens apenas. Pode ser usado o slice(4) que puxa a aprtir do 4° item
-	$posts = Post::all()->take(2);
+	$posts = Post::all()->take($qty);
+		
 	return PostResource::collection($posts);
 	}
 

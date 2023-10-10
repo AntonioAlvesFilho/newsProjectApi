@@ -41,7 +41,7 @@ Route::group([
 
 	Route::prefix('posts')->group(function () {
 		Route::get('', [PostController::class, 'index']);
-		Route::get('public-light', [PostController::class, 'publicLight']);
+		Route::get('quantity/{qty}', [PostController::class, 'postsByQty']);
 		Route::get('my-posts', [PostController::class, 'myPosts']);
 		Route::get('{id}', [PostController::class, 'postView']);
 		// Route::put('{post}', [PostController::class, 'update']);
